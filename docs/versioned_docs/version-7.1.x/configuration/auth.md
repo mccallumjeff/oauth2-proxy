@@ -143,8 +143,7 @@ Make sure you set the following to the appropriate url:
     --redeem-url="http(s)://<keycloak host>/auth/realms/<your realm>/protocol/openid-connect/token"
     --profile-url="http(s)://<keycloak host>/auth/realms/<your realm>/protocol/openid-connect/userinfo"
     --validate-url="http(s)://<keycloak host>/auth/realms/<your realm>/protocol/openid-connect/userinfo"
-    --keycloak-group=<first_allowed_user_group>
-    --keycloak-group=<second_allowed_user_group>
+    --allowed-groups = ["admin"]
     
 For group based authorization, the optional `--keycloak-group` (legacy) or `--allowed-group` (global standard)
 flags can be used to specify which groups to limit access to.
@@ -153,8 +152,9 @@ If these are unset but a `groups` mapper is set up above in step (3), the provid
 populate the `X-Forwarded-Groups` header to your upstream server with the `groups` data in the
 Keycloak userinfo endpoint response.
 
-The group management in keycloak is using a tree. If you create a group named admin in keycloak
-you should define the 'keycloak-group' value to /admin.
+The group management in keycloak uses a tree. If you create a group named admin in keycloak
+you should define the 'keycloak-groups' value to admin. 
+If you add multiple groups to the allowed_groups array the user must exist in all groups in Keycloak to gain access.
 
 ### GitLab Auth Provider
 
